@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask GPT</title>
+</head>
+<body>
+    <h1>Ask GPT</h1>
+    <textarea id="question" rows="4" cols="50"></textarea><br>
+    <button onclick="askGPT()">Ask</button>
+    <h2>Answer:</h2>
+    <p id="answer"></p>
+
+    <script>
+        async function askGPT() {
+            const question = document.getElementById('question').value;
+            const response = await fetch('https://your-vercel-app.vercel.app/api/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ question })
+            });
+            const data = await response.json();
+            document.getElementById('answer').innerText = data.answer;
+        }
+    </script>
+</body>
+</html>
